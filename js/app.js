@@ -7,6 +7,7 @@ let word = "";
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
 let textBox = document.querySelector('#textbox');
+let messages = document.querySelector('#messages');
 
 /* Functions and app logic */
 
@@ -16,11 +17,15 @@ let textBox = document.querySelector('#textbox');
 const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
     console.log('The word is:', word);
-    displayWordBlanks();
+    displayWordStatus();
 }
 
 // Helper function that adds multiple <div>_</div> to DOM
-const displayWordBlanks = () => {
+const displayWordStatus = () => {
+    // Clear(empty) all of the divs children 
+    while(wordContainer.firstChild) {
+        wordContainer.removeChild(wordContainer.firstChild);
+    }
     for(let i = 0; i < word.length; i++) {
         let letter = document.createElement('div');
         letter.textContent = '_'
@@ -30,9 +35,14 @@ const displayWordBlanks = () => {
 }
 
 // On submit event: Guess a letter or guess the whole word
-guessLetter = event => {
+const guessLetter = event => {
     event.preventDefault();
     console.log(`You submitted: ${textBox.value}`);
+}
+
+// Display a message to the user in the messagebox
+const displayMessage = msg => { 
+    /* Your code here! */
 }
 
 /* Event Listeners */
