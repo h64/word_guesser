@@ -19,12 +19,17 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 
 * Your game will need some state to keep track of the word, how many letters are yet to be guessed, and the current state of the hangman.
 * You can initially represent the hangman as a decreasing number of guesses remaining.
+<<<<<<< HEAD
 * You can use the `in` keyword to test to see if a letter is in the secret word.
+=======
+* You can use the `in` keyword or `.includes()` to test to see if a letter is in the secret word.
+>>>>>>> 0a8b6ef643d3ff74443ca5fd84ed29b7d5cf64cc
 * Remember to account for case differences.
 
 ### Pseudocode
 
 1. Initialize the game: Initialize all variables to default values.
+<<<<<<< HEAD
 2. Display hangman or number of guesses remaining.
 3. Randomly select a secret word.
 4. Display the word as blanks.
@@ -34,6 +39,15 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 8. If incorrect, add the letter to the guessed list, decrement remaining guesses, and/or draw another bit of the hangman.
 9. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing.
 10. Loop back up to step 6 and continue until the word is fully revealed or guesses are used up.
+=======
+2. Randomly select a secret word.
+3. Display the word as blanks.
+4. Ask the user for a letter.
+5. Determine if letter is correct or incorrect.
+6. If incorrect, tell the user it's incorrect.
+7. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing.
+8. When the word is fully revealed, tell the user they've won!
+>>>>>>> 0a8b6ef643d3ff74443ca5fd84ed29b7d5cf64cc
 
 ### How to draw that secret word?
 

@@ -20,12 +20,12 @@ const initialize = event => {
     wordStatus = word.split('').map(l => '_');
 
     console.log('The word is:', word);
-    console.log('Current word status is:', wordStatus)
     displayWordStatus();
 }
 
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
+    // Clear(empty) all of the divs children 
     while(wordContainer.firstChild) {
         wordContainer.removeChild(wordContainer.firstChild);
     }
