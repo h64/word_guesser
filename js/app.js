@@ -1,30 +1,40 @@
-// Constants
+/* Constants */
 const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
-// Variables and App State
+/* Variables and App State */
 let word = "";
 
-// DOM References
+/* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
+let textBox = document.querySelector('#textbox');
 
+/* Functions and app logic */
 
-// Functions and app logic
-const initialize = () => {
+// Initialize the game: 
+// 1. Reset state variables
+// 2. Display the word blanks in the DOM
+const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-    displayBlankWord();
+    console.log('The word is:', word);
+    displayWordBlanks();
 }
 
-const displayBlankWord = () => {
-    let letters = [];
+// Helper function that adds multiple <div>_</div> to DOM
+const displayWordBlanks = () => {
     for(let i = 0; i < word.length; i++) {
-        // console.log(word[i]);
         let letter = document.createElement('div');
         letter.textContent = '_'
         letter.classList.add("letter");
         wordContainer.appendChild(letter);
-
     }
 }
 
-// Event Listeners
-document.addEventListener('DOMContentLoaded', initialize)
+// On submit event: Guess a letter or guess the whole word
+guessLetter = event => {
+    event.preventDefault();
+    console.log(`You submitted: ${textBox.value}`);
+}
+
+/* Event Listeners */
+document.addEventListener('DOMContentLoaded', initialize);
+document.addEventListener('submit', guessLetter);

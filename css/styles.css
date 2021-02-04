@@ -13,3 +13,7 @@ body {
     display: inline-block;
     margin: 10px;
 }
+
+form {
+    margin-top: 50px;
+}
