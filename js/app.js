@@ -1,9 +1,12 @@
 /* Constants */
 const WORD_LIST = ["producer", "brainstorm", "explosion", "soup", "feather"];
-let secretWordArray = [];
 
 /* Variables and App State */
 let secretWord = "";
+let displayWord = "";
+let secretWordArray = [];
+let correctGuessArray = [];
+console.log(correctGuessArray);
 
 /* DOM References */
 let wordContainer = document.querySelector("#guess-word-container");
@@ -23,7 +26,7 @@ const initialize = (event) => {
   secretWordLetters = secretWord.split("");
   //   console.log(secretWordLetters)
   secretWordLetters.forEach((element) => {
-    secretWordArray.push(element);
+    secretWordArray.unshift(element);
   });
   // console.log(secretWordArray)
 };
@@ -47,17 +50,39 @@ const guessLetter = (event) => {
   event.preventDefault();
   //   console.log(`You submitted: ${textBox.value}`);
   let letterGuess = textBox.value;
-  if (secretWordArray.includes(letterGuess)) {
-    console.log("its a match");
+  if (letterGuess.length <= 1 && secretWordArray.includes(letterGuess)) {
+    messages.innerText = `${letterGuess} is a match!`;
+    correctGuessArray.unshift(letterGuess);
+    newDisplayWord();
   } else {
-    console.log("no go");
+    messages.innerText = `${letterGuess} is not a match.`;
   }
 };
 
-// Display a message to the user in the messagebox
-const displayMessage = (msg) => {
-  /* Your code here! */
+// replace _ with correctGuess
+const newDisplayWord = () => {
+  while (wordContainer.firstChild) {
+    wordContainer.removeChild(wordContainer.firstChild);
+  }
+  for (let i = 0; i < secretWord.length; i++) {
+    if (secretWord[i] === textBox.value) {
+      let letter = document.createElement("div");
+      letter.textContent = `${correctGuessArray[0]}`;
+      letter.classList.add("letter");
+      wordContainer.appendChild(letter);
+    } else {
+      let letter = document.createElement("div");
+      letter.textContent = "_";
+      letter.classList.add("letter");
+      wordContainer.appendChild(letter);
+    }
+  }
 };
+
+// // Display a message to the user in the messagebox
+// const displayMessage = (msg) => {
+//   /* Your code here! */
+// };
 
 /* Event Listeners */
 document.addEventListener("DOMContentLoaded", initialize);
