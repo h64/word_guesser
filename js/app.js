@@ -5,7 +5,8 @@ const WORD_LIST = ["producer", "brainstorm", "explosion", "soup", "feather"];
 let secretWord = "";
 let displayWord = "";
 let secretWordArray = [];
-let correctGuessArray = [];
+let unguessedWord = [];
+let underscoreCounter = null;
 
 /* DOM References */
 let wordContainer = document.querySelector("#guess-word-container");
@@ -21,8 +22,12 @@ let letterToReplace = document.querySelector(".letter");
 // 2. Display the word blanks in the DOM
 const initialize = (event) => {
   secretWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+  for (let i = 0; i < secretWord.length; i++) {
+    unguessedWord.push("_");
+  }
   console.log("The word is:", secretWord);
   displayWordStatus();
+  underscoreCounter();
   secretWordLetters = secretWord.split("");
   //   console.log(secretWordLetters)
   secretWordLetters.forEach((element) => {
@@ -39,51 +44,64 @@ const displayWordStatus = () => {
   }
   for (let i = 0; i < secretWord.length; i++) {
     let letter = document.createElement("div");
-    letter.textContent = "_";
+    letter.textContent = unguessedWord[i];
     letter.classList.add("letter");
     wordContainer.appendChild(letter);
   }
 };
 
-// On submit event: Guess a letter or guess the whole word
 const guessLetter = (event) => {
   event.preventDefault();
   //   console.log(`You submitted: ${textBox.value}`);
   let letterGuess = textBox.value;
-  if (secretWordArray.includes(correctGuessArray)) {
-    messages.innerText = `You won! Love this for you.`;
-  } else if (letterGuess.length <= 1 && secretWordArray.includes(letterGuess)) {
-    messages.innerText = `${letterGuess} is a match!`;
-    correctGuessArray.unshift(letterGuess);
-    newDisplayLetter();
-    // secretWordArray.pop(secretWordArray[i])
-  } else {
-    messages.innerText = `${letterGuess} is not a match.`;
+  if (letterGuess == secretWord) {
+    unguessedWord = secretWord.split("");
+    displayWordStatus();
+    messages.innerText = `You guessed the whole word! Love this for you.`;
+  } else if (letterGuess.length == 1) {
+    if (secretWord.includes(letterGuess)) {
+      for (let i = 0; i < secretWord.length; i++) {
+        if (secretWord[i] == letterGuess) {
+          unguessedWord[i] = letterGuess;
+          messages.innerText = `${letterGuess} is a match!`;
+        }
+      }
+      displayWordStatus();
+    } else {
+      messages.innerText = `${letterGuess} is not a match.`;
+    }
   }
   clear();
 };
 
-// replace _ with correctGuess
-
-const newDisplayLetter = () => {
-  if (wordContainer.firstChild.textContent === "_") {
-    for (let i = 0; i < secretWord.length; i++) {
-      if (secretWord[i] === textBox.value) {
-        wordContainer.removeChild(wordContainer.firstChild);
-        let letter = document.createElement("div");
-        letter.textContent = `${correctGuessArray[0]}`;
-        letter.classList.add("letter");
-        wordContainer.appendChild(letter);
-      } else {
-        wordContainer.removeChild(wordContainer.firstChild);
-        let letter = document.createElement("div");
-        letter.textContent = "_";
-        letter.classList.add("letter");
-        wordContainer.appendChild(letter);
-      }
-    }
+underscoreCounter = () => {
+  if (unguessedWord.includes("_")) {
+    return true;
+  } else {
+    return false;
   }
 };
+
+// On submit event: Guess a letter or guess the whole word
+// const guessLetter = (event) => {
+//   event.preventDefault();
+//   //   console.log(`You submitted: ${textBox.value}`);
+//   let letterGuess = textBox.value;
+//   if (secretWord.includes(letterGuess) && unguessedWord.length === 1) {
+//     messages.innerText = `You won! Love this for you.`;
+//   }
+
+// else if (secretWord === letterGuess){
+//     messages.innerText = `You guessed the whole word! Love this for you.`;
+//   } else if (letterGuess.length == 1 && secretWord.includes(letterGuess)) {
+//     messages.innerText = `${letterGuess} is a match!`;
+//     unguessedWord[i] = letterGuess;
+//     // secretWordArray.pop(secretWordArray[i])
+//   } else {
+//     messages.innerText = `${letterGuess} is not a match.`;
+//   }
+//   clear();
+// };
 
 //   const newDisplayLetter = () => {
 //     for (let i = 0; i < secretWord.length; i++) {
