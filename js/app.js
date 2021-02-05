@@ -3,7 +3,7 @@ const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
 /* Variables and App State */
 let word = "";
-
+let unguessedWord = []
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
 let textBox = document.querySelector('#textbox');
@@ -16,6 +16,11 @@ let messages = document.querySelector('#messages');
 // 2. Display the word blanks in the DOM
 const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
+
+    for(let i = 0; i <word.length; i++){
+        unguessedWord.push(' ')
+    }
+    console.log(unguessedWord)
     console.log('The word is:', word);
     displayWordStatus();
 }
@@ -28,7 +33,7 @@ const displayWordStatus = () => {
     }
     for(let i = 0; i < word.length; i++) {
         let letter = document.createElement('div');
-        letter.textContent = '_'
+        letter.textContent = unguessedWord[i]
         letter.classList.add("letter");
         wordContainer.appendChild(letter);
     }
@@ -37,12 +42,45 @@ const displayWordStatus = () => {
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
     event.preventDefault();
-    console.log(`You submitted: ${textBox.value}`);
+    console.log(`You submitted: ${textBox.value}`)
+    let guess = textBox.value
+
+    if(guess == word) {
+        console.log('whole match!')
+    }
+    else if(guess.length == 1) {
+        if(word.includes(guess)) {
+            console.log(guess + ' is inside of ' + word)
+            for(let i = 0; i < word.length; i++){
+                if(word[i] == guess) {
+                    unguessedWord[i] = guess;
+                }
+            }
+            displayWordStatus()
+        } else{
+            console.log(guess + ' is not inside of ' + word)
+        }
+        for(let l in word) {
+
+        }
+    }
+
 }
 
+
+const guessWholeWord = () => {
+
+}
 // Display a message to the user in the messagebox
 const displayMessage = msg => { 
     /* Your code here! */
+    while(messages.firstChild) {
+        messages.removeChild(messages.firstChild)
+    }
+    let paragraph = document.createElement('p')
+    paragraph.textContent = msg
+    messages.appendChild(paragraph)
+
 }
 
 /* Event Listeners */
