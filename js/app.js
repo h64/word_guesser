@@ -5,6 +5,8 @@ const WORD_LIST = ["producer", "brainstorm", "explosion", "soup", "feather"];
 let word = "";
 let guesses = [];
 let misses = [];
+let unguessedWord = [];
+let letters = [];
 /* DOM References */
 let wordContainer = document.querySelector("#guess-word-container");
 let textBox = document.querySelector("#textbox");
@@ -19,6 +21,10 @@ const initialize = (event) => {
   letters = word.split("");
   console.log(letters);
   console.log("The word is:", word);
+  letters.forEach(letter=>{
+    unguessedWord.push("_")
+  })
+  console.log(unguessedWord)
   displayWordStatus();
 };
 
@@ -30,9 +36,10 @@ const displayWordStatus = () => {
   }
   for (let i = 0; i < word.length; i++) {
     let letter = document.createElement("div");
-    letter.textContent = "_";
+    letter.textContent = unguessedWord[i];
     letter.classList.add("letter");
     wordContainer.appendChild(letter);
+    console.log(letter.textContent)
   }
 };
 
@@ -55,20 +62,31 @@ const guessLetter = (event) => {
       console.log(guesses);
       message.innerText = "you got it! pick another letter";
       messages.appendChild(message);
-
-      letters.forEach((item) => {
-        if ((item = input)) {
-          let letter = document.createElement("div");
-          letter.textContent = `${guesses[0]}`;
-          letter.classList.add("letter");
-          wordContainer.appendChild(letter);
-        } else {
-          let letter = document.createElement("div");
-          letter.textContent = "_";
-          letter.classList.add("letter");
-          wordContainer.appendChild(letter);
+      for (let i= 0; i<letters.length; i++){
+        if (letters[i] == input) {
+          unguessedWord[i]=input;
         }
-      });
+      }
+      // letters.forEach(letter =>{
+      //   if(letters[letter]== input){
+      //   unguessedWord[i]=input;}
+      // });
+      displayWordStatus();
+
+
+      // letters.forEach(item => {
+      //   if (item = input) {
+      //     let letter = document.createElement("div");
+      //     letter.textContent = `${guesses[0]}`;
+      //     letter.classList.add("letter");
+      //     wordContainer.appendChild(letter);
+      //   } else {
+      //     let letter = document.createElement("div");
+      //     letter.textContent = "_";
+      //     letter.classList.add("letter");
+      //     wordContainer.appendChild(letter);
+      //   }
+      // });
       textBox.value = null;
     } else {
       misses.unshift(input);
