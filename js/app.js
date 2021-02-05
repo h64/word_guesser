@@ -1,50 +1,64 @@
 /* Constants */
-const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
+const WORD_LIST = ["producer", "brainstorm", "explosion", "soup", "feather"];
+let secretWordArray = [];
 
 /* Variables and App State */
-let word = "";
+let secretWord = "";
 
 /* DOM References */
-let wordContainer = document.querySelector('#guess-word-container');
-let textBox = document.querySelector('#textbox');
-let messages = document.querySelector('#messages');
+let wordContainer = document.querySelector("#guess-word-container");
+let textBox = document.querySelector("#textbox");
+let messages = document.querySelector("#message-container");
+let guessForm = document.querySelector("#guess-form");
 
 /* Functions and app logic */
 
-// Initialize the game: 
+// Initialize the game:
 // 1. Reset state variables
 // 2. Display the word blanks in the DOM
-const initialize = event => {
-    word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-    console.log('The word is:', word);
-    displayWordStatus();
-}
+const initialize = (event) => {
+  secretWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+  console.log("The word is:", secretWord);
+  displayWordStatus();
+  secretWordLetters = secretWord.split("");
+  //   console.log(secretWordLetters)
+  secretWordLetters.forEach((element) => {
+    secretWordArray.push(element);
+  });
+  // console.log(secretWordArray)
+};
 
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
-    // Clear(empty) all of the divs children 
-    while(wordContainer.firstChild) {
-        wordContainer.removeChild(wordContainer.firstChild);
-    }
-    for(let i = 0; i < word.length; i++) {
-        let letter = document.createElement('div');
-        letter.textContent = '_'
-        letter.classList.add("letter");
-        wordContainer.appendChild(letter);
-    }
-}
+  // Clear(empty) all of the divs children
+  while (wordContainer.firstChild) {
+    wordContainer.removeChild(wordContainer.firstChild);
+  }
+  for (let i = 0; i < secretWord.length; i++) {
+    let letter = document.createElement("div");
+    letter.textContent = "_";
+    letter.classList.add("letter");
+    wordContainer.appendChild(letter);
+  }
+};
 
 // On submit event: Guess a letter or guess the whole word
-const guessLetter = event => {
-    event.preventDefault();
-    console.log(`You submitted: ${textBox.value}`);
-}
+const guessLetter = (event) => {
+  event.preventDefault();
+  //   console.log(`You submitted: ${textBox.value}`);
+  let letterGuess = textBox.value;
+  if (secretWordArray.includes(letterGuess)) {
+    console.log("its a match");
+  } else {
+    console.log("no go");
+  }
+};
 
 // Display a message to the user in the messagebox
-const displayMessage = msg => { 
-    /* Your code here! */
-}
+const displayMessage = (msg) => {
+  /* Your code here! */
+};
 
 /* Event Listeners */
-document.addEventListener('DOMContentLoaded', initialize);
-document.addEventListener('submit', guessLetter);
+document.addEventListener("DOMContentLoaded", initialize);
+guessForm.addEventListener("submit", guessLetter);
