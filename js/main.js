@@ -54,6 +54,12 @@ const guessLetter = (event) => {
     }
   }
 };
+
+// Display a message to the user in the messagebox
+const displayMessage = (msg) => {
+  /* Your code here! */
+};
+
 /* Event Listeners */
 document.addEventListener("DOMContentLoaded", initialize);
 guessForm.addEventListener("submit", guessLetter);
