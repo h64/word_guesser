@@ -3,6 +3,7 @@ const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
 /* Variables and App State */
 let word = "";
+let unguessedWord = [];
 
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
@@ -16,7 +17,14 @@ let messages = document.querySelector('#messages');
 // 2. Display the word blanks in the DOM
 const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
+
+    for(let i = 0 < word.length; i++) {
+        unguessedWord.push('_')
+    }
+
+    console.log(unguessedWord);
     console.log('The word is:', word);
+
     displayWordStatus();
 }
 
@@ -38,6 +46,26 @@ const displayWordStatus = () => {
 const guessLetter = event => {
     event.preventDefault();
     console.log(`You submitted: ${textBox.value}`);
+
+    let guess = textBox.value;
+
+    if(guess == word) {
+    console.log('whole match!@')
+    }
+    else if (guess.length == 1) {
+        if (word.includes(guess)) {
+             console.log('Yes' , guess, 'is inside of', word);
+        }   for(let i = 0; i < word.length; i++) {
+
+    
+        }
+    }    
+}
+
+
+
+const guessWholeWord = () {
+
 }
 
 // Display a message to the user in the messagebox
