@@ -8,7 +8,7 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 
 ## Functionality
 
-* Store a list (or tuple) of 5 to 10 words in your script.
+* Store an array of 5 to 10 words in your script.
 * Randomly choose a word from this list as the secret word.
 * Display the unrevealed word as underscores (with the same length.)
 * Prompt the user to enter a letter.
