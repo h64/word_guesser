@@ -7,6 +7,7 @@ const guessForm = document.getElementById("guess-form");
 let word = "";
 let unguessedWord = [];
 let textBox = document.getElementById("textbox");
+let letter = "";
 /* DOM References */
 
 let guesForm = document.getElementById("guess-form");
@@ -29,7 +30,7 @@ const displayWordStatus = () => {
     wordContainer.removeChild(wordContainer.firstChild);
   }
   for (let i = 0; i < word.length; i++) {
-    let letter = document.createElement("div");
+    letter = document.createElement("div");
     letter.textContent = "_";
     letter.classList.add("letter");
     wordContainer.appendChild(letter);
@@ -51,6 +52,9 @@ const guessLetter = (event) => {
   for (let n in word) {
     if (textBox.value == word[n]) {
       console.log(word[n]);
+      letter.textContent = word[n];
+      letter.classList.add("letter");
+      wordContainer.appendChild(letter);
     }
   }
 };
