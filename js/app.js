@@ -31,31 +31,31 @@ const displayWordStatus = () => {
     letter.classList.add("letter");
     wordContainer.appendChild(letter);
   }
+
+  const guessLetter = (event) => {
+    //<----------guessLetter(function) HOOKS SUBMIT BUTTON UP TO CONSOLE LOG// NOT SAYING IF GUESS IS CORRECT
+    event.preventDefault();
+    let guessLetter = word.split("");
+
+    console.log(`You submitted: ${textBox.value}`);
+    console.log(guessLetter.includes(textBox.value));
+
+    if (textBox.value === "") {
+      displayMessage("Try & guess one letter at a time");
+    } else if (guessLetter.includes(textBox.value)) {
+      displayMessage("You guessed a correct letter!");
+      textBox.value = null;
+    } else {
+      displayMessage("Incorrect Letter!");
+      textBox.value = null;
+    }
+  };
+  document.addEventListener("submit", guessLetter);
 };
+
 const displayMessage = (msg) => {
   console.log(textBox.innerText);
   messages.innerText = msg;
 };
-// On submit event: Guess a letter or guess the whole word
-const guessLetter = (event) => {
-  //<-------------------guessLetter(function) HOOKS SUBMIT BUTTON UP TO CONSOLE LOG// NOT SAYING IF GUESS IS CORRECT
-  event.preventDefault();
-  let splitWord = word.split("");
-  let guessLetter = splitWord;
 
-  console.log(`You submitted: ${textBox.value}`);
-  console.log(guessLetter.includes(textBox.value));
-
-  if (textBox.value === "") {
-    displayMessage("Try & guess one letter at a time");
-  } else if (guessLetter.includes(textBox.value)) {
-    displayMessage("You guessed a correct letter!");
-  } else {
-    displayMessage("Incorrect Letter!");
-    textBox.value = null;
-  }
-};
-
-/* Event Listeners */
 document.addEventListener("DOMContentLoaded", initialize);
-document.addEventListener("submit", guessLetter);
