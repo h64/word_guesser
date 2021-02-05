@@ -2,14 +2,17 @@
 const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
 /* Variables and App State */
-let word = "";
-let guess = []
+let randomWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
 
+console.log('The word is:', randomWord);
+
+let s;
+let answerArray = []
 
 
 
 /* DOM References */
-let wordContainer = document.querySelector('#guess-word-container');
+// let wordContainer = document.querySelector('#guess-word-container');
 let textBox = document.querySelector('#textbox');
 let messages = document.querySelector('#messages');
 
@@ -19,9 +22,13 @@ let messages = document.querySelector('#messages');
 // 1. Reset state variables
 // 2. Display the word blanks in the DOM
 const initialize = event => {
-    word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-    console.log('The word is:', word);
-    displayWordStatus();
+    for(let i = 0; i < randomWord.length; i++){
+        answerArray[i] = '_';
+    }
+    s = answerArray.join(" ");
+    document.querySelector('#guess-word-container').innerHtml = s;
+
+    // displayWordStatus();
 }
 
 // Helper function that adds multiple <div>_</div> to DOM
@@ -41,22 +48,22 @@ const displayWordStatus = () => {
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
     event.preventDefault();
-    let letter = textbox.value;
+    let letter = document.querySelector('#textbox').value;
     // console.log(`You submitted: ${textBox.value}`);
-    for(let i = 0; i< word.length; i++){
-        if(word[i] === letter){
-            guess[i] = letter;
+    for(let i = 0; i < randomWord.length; i++) {
+        if(randomWord[i] === letter){
+            answerArray[i] = letter;
             console.log(letter)
-            wordContainer.innerHTML = guess.join(' ');
-
         }
+
     }
-    
+    document.getElementById('guess-word-container').innerHTML = answerArray.join(' ');
 }
 
 // Display a message to the user in the messagebox
 const displayMessage = msg => { 
     /* Your code here! */
+
 }
 
 /* Event Listeners */
