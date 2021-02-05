@@ -12,8 +12,8 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 <!-- * Randomly choose a word from this list as the secret word. -->
 <!-- * Display the unrevealed word as underscores (with the same length.) -->
 <!-- * Prompt the user to enter a letter. -->
-* If the letter is in the word, mark it as revealed and visually display that letter in the word.
-* If the letter is incorrect, indicate to the user that the guess was incorrect.
+<!-- * If the letter is in the word, mark it as revealed and visually display that letter in the word. -->
+<!-- * If the letter is incorrect, indicate to the user that the guess was incorrect. -->
 
 ### Hints
 
@@ -28,9 +28,9 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 <!-- 2. Randomly select a secret word. -->
 <!-- 3. Display the word as blanks. -->
 <!-- 4. Ask the user for a letter. -->
-5. Determine if letter is correct or incorrect.
-6. If incorrect, tell the user it's incorrect.
-7. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing.
+<!-- 5. Determine if letter is correct or incorrect. -->
+<!-- 6. If incorrect, tell the user it's incorrect. -->
+<!-- 7. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing. -->
 8. When the word is fully revealed, tell the user they've won!
 
 ### How to draw that secret word?
