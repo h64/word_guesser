@@ -15,7 +15,7 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 <!-- - Prompt the user to enter a letter. -->
 
 - If the letter is in the word, mark it as revealed and visually display that letter in the word.
-- If the letter is incorrect, indicate to the user that the guess was incorrect.
+<!-- - If the letter is incorrect, indicate to the user that the guess was incorrect. -->
 
 ### Hints
 
@@ -31,8 +31,9 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 3. Display the word as blanks.
 4. Ask the user for a letter. -->
 
-5. Determine if letter is correct or incorrect.
-6. If incorrect, tell the user it's incorrect.
+<!-- 5. Determine if letter is correct or incorrect. -->
+<!-- 6. If incorrect, tell the user it's incorrect. -->
+
 7. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing.
 8. When the word is fully revealed, tell the user they've won!
 
@@ -41,8 +42,11 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 Being able to render a word as some underscores and some letters will be a little bit of a challenge. What I would recommend is the following:
 
 1. Make one variable to hold the secret word.
+<!-- mine is word -->
 2. Make one variable to hold every letter that the user guesses.
+<!-- mine is guesses -->
 3. Make one variable to hold the word as it is displayed.
+<!-- mine is -->
 4. To decide if you should render a blank underscore or render a correct letter, you can iterate over the secret word checking to see if each letter is in the guessed letter list. If it is, use the actual letter character. If it is not, use an underscore to represent a letter not yet guessed.
 
 ## No Match

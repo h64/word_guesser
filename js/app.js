@@ -3,12 +3,12 @@ const WORD_LIST = ["producer", "brainstorm", "explosion", "soup", "feather"];
 
 /* Variables and App State */
 let word = "";
-
+let guesses = [];
+let misses = [];
 /* DOM References */
 let wordContainer = document.querySelector("#guess-word-container");
 let textBox = document.querySelector("#textbox");
 let messages = document.querySelector("#messages-container");
-
 /* Functions and app logic */
 
 // Initialize the game:
@@ -16,6 +16,8 @@ let messages = document.querySelector("#messages-container");
 // 2. Display the word blanks in the DOM
 const initialize = (event) => {
   word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
+  letters = word.split("");
+  console.log(letters);
   console.log("The word is:", word);
   displayWordStatus();
 };
@@ -33,37 +35,55 @@ const displayWordStatus = () => {
     wordContainer.appendChild(letter);
   }
 };
-const appendMessage = (message) => {
-  messages.appendChild(messages(message));
-};
 
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = (event) => {
   event.preventDefault();
+  while (messages.firstChild) {
+    messages.removeChild(messages.firstChild);
+  }
 
   let input = textbox.value;
+  let message = document.createElement("h3");
   if (input.length > 1) {
-    console.log("please pick only one letter");
-  }
-  if (input.length == 1) {
-    console.log(input);
+    message.innerText = "please pick only one letter";
+    messages.appendChild(message);
+    textBox.value = null;
+  } else if (input.length == 1) {
+    if (letters.includes(input)) {
+      guesses.unshift(input);
+      console.log(guesses);
+      message.innerText = "you got it! pick another letter";
+      messages.appendChild(message);
+
+      letters.forEach((item) => {
+        if ((item = input)) {
+          let letter = document.createElement("div");
+          letter.textContent = `${guesses[0]}`;
+          letter.classList.add("letter");
+          wordContainer.appendChild(letter);
+        } else {
+          let letter = document.createElement("div");
+          letter.textContent = "_";
+          letter.classList.add("letter");
+          wordContainer.appendChild(letter);
+        }
+      });
+      textBox.value = null;
+    } else {
+      misses.unshift(input);
+      console.log(misses);
+      message.innerText = "pick another letter";
+      messages.appendChild(message);
+      console.log(`You submitted: ${textBox.value}`);
+      textBox.value = null;
+    }
   } else {
-    console.log("please submit a letter");
+    message.innerText = "pick one letter!";
+    messages.appendChild(message);
+    textBox.value = null;
   }
-
-  letters = word.split("");
-  console.log(letters);
-  if (letters.includes(input)) {
-    console.log(input);
-  } else console.log("pick another letter");
-  console.log(`You submitted: ${textBox.value}`);
 };
-
-// Display a message to the user in the messagebox
-const displayMessage = (msg) => {
-  /* Your code here! */
-};
-
 /* Event Listeners */
 document.addEventListener("DOMContentLoaded", initialize);
 document.addEventListener("submit", guessLetter);
