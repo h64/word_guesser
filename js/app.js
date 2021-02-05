@@ -1,9 +1,11 @@
 /* Constants */
 const WORD_LIST = ['feather', 'offense', 'football', 'marzipan', 'balloon']
 
+
 /* Game Logic Variables and State */
 let secretWord = ""
 let unguessedWord = [];
+let word = 0;
 
 /* DOM References */
 let guessForm = document.getElementById('guess-form')
@@ -18,36 +20,33 @@ let wordLettersEl = document.getElementById('wrong-letters')
 // 2. Display the word blanks in the DOM
 const initialize = event => {
     secretWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-
     for (let i = 0; i < secretWord.length; i++) {
         unguessedWord.push('_');
     }
-    // console.log(unguessedWord);
-    // console.log('The secret word is ', secretWord);
-    displayWordStatus()
+    console.log(unguessedWord);
+    console.log('The secret word is ', secretWord);
+
+
 }
+
+initialize()
 
 const handleSubmit = event => {
     // sets game state 
     event.preventDefault();
     let guess = messageContainer.value;
-    if (guess.length == 0) return;
+    if (guess == 0) return;
 
-    letterGuess = secretWord.split('');
+    letterString = unguessedWord.push('');
 
-    if (guess.length === 1) {
-        if (letterGuess(guess)) {
-            displayMessage(`${guess} is correct`)
-        }
-        for (let i = 0; i < secretWord.length; i++) {
-            if (secretWord.includes(guess)) {
-
-            }
+    for (let i = 0; i < secretWord.length; i++) {
+        if (secretWord[i] === guess) {
+            unguessedWord[i] = guess;
         }
     }
-
-
 }
+
+console.log(secretWord)
 
 const displayWordStatus = () => {
     while (wordContainer.firstChild) {
