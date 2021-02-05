@@ -3,11 +3,13 @@ const WORD_LIST = ["kiwi", "strawberry", "apple", "pear"];
 
 const guesses = document.getElementById("guesses");
 const guessForm = document.getElementById("guess-form");
+const maxGID = document.getElementById("maxG");
 /* Game Logic Variables and State */
 let word = "";
 let unguessedWord = [];
 let textBox = document.getElementById("textbox");
 let letter = "";
+let maxGuesses = word.length;
 /* DOM References */
 
 let guesForm = document.getElementById("guess-form");
@@ -19,6 +21,8 @@ const initialize = (event) => {
   word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
   console.log(word);
   unguessedWord = word.split(" ").map((letter) => "_");
+  maxGuesses = word.length;
+  maxGID.innerText = `max guesses ${maxGuesses}`;
   displayWordStatus();
 };
 
@@ -55,6 +59,8 @@ const guessLetter = (event) => {
       letter.textContent = word[n];
       letter.classList.add("letter");
       wordContainer.appendChild(letter);
+      maxGuesses--;
+      maxGID.innerText = `max guesses ${maxGuesses}`;
     }
   }
 };
