@@ -74,8 +74,7 @@ const newDisplayLetter = () => {
         letter.textContent = `${correctGuessArray[0]}`;
         letter.classList.add("letter");
         wordContainer.appendChild(letter);
-      } 
-      else {
+      } else {
         wordContainer.removeChild(wordContainer.firstChild);
         let letter = document.createElement("div");
         letter.textContent = "_";
