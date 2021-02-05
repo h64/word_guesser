@@ -22,7 +22,7 @@ const initialize = event => {
     displayWordStatus();
     for (let i = 0; i < word.length; i++) {
         arrayLetter = word.charAt(i);
-        wordArray.push(arrayLetter)
+        wordArray.push(arrayLetter);
     }
     console.log(wordArray)
 }
