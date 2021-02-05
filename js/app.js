@@ -9,6 +9,7 @@ let unguessedWord = [];
 let guessForm = document.getElementById('guess-form')
 let messageContainer = document.querySelector('#message-container')
 let wordContainer = document.querySelector('#word-container')
+let wordLettersEl = document.getElementById('wrong-letters')
 
 /* Functions and app logic */
 
@@ -27,6 +28,24 @@ const initialize = event => {
 }
 
 const handleSubmit = event => {
+    // sets game state 
+    event.preventDefault();
+    let guess = messageContainer.value;
+    if (guess.length == 0) return;
+
+    letterGuess = secretWord.split('');
+
+    if (guess.length === 1) {
+        if (letterGuess(guess)) {
+            displayMessage(`${guess} is correct`)
+        }
+        for (let i = 0; i < secretWord.length; i++) {
+            if (secretWord.includes(guess)) {
+
+            }
+        }
+    }
+
 
 }
 
@@ -41,12 +60,18 @@ const displayWordStatus = () => {
         wordContainer.appendChild(letterDiv);
     })
 }
-
 // displays msg
+// refer to rock pap sci game today
 const displayMessage = msg => {
+    while (messages.firstChild) {
+        messages.removeChild(messages.firstChild)
+    }
+    let msg1 = document.createElement('h3');
+    msg1.textContent = msg;
 
+    messages.appendChild(msg1);
 }
 
 /* Event Listeners */
-document.addEventListener('DOMContentLoaded', initialize)
-guessForm.addEventListener('submit', handleSubmit)
+document.addEventListener('DOMContentLoaded', initialize);
+guessForm.addEventListener('submit', handleSubmit);
