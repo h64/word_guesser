@@ -22,6 +22,7 @@ const initialize = event => {
 
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
+
     // Clear(empty) all of the divs children 
     while(wordContainer.firstChild) {
         wordContainer.removeChild(wordContainer.firstChild);
@@ -37,14 +38,61 @@ const displayWordStatus = () => {
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
     event.preventDefault();
+
+    if(textBox.value.length == 1){
+    
     console.log(`You submitted: ${textBox.value}`);
+
+    wordSplit = word.split()
+    let allFalse = false;
+    for(i = 0; i < word.length; i++){
+
+        
+        if(textBox.value == word[i]){
+        wordContainer.children[i].textContent = word[i]
+        displayMessage("Right on!")
+            allFalse = true;
+        }   
+        
+
+
+    }
+
+    if(allFalse === false){
+        displayMessage("Nope! Not even close!!")
+    }
+
+    } else if(textBox.value.length == word.length){
+
+        if(textBox.value == word){
+            console.log("win")
+            
+            for(i = 0; i < word.length; i++){
+            wordContainer.children[i].textContent = word[i]
+            } 
+            
+            displayMessage("You got the word!")
+
+        }
+
+    }
+
+    else{
+        alert("invalid # of letters guessed")
+    }
+
 }
+
 
 // Display a message to the user in the messagebox
 const displayMessage = msg => { 
     /* Your code here! */
+    messages.innerText = msg;
 }
 
 /* Event Listeners */
 document.addEventListener('DOMContentLoaded', initialize);
 document.addEventListener('submit', guessLetter);
+
+
+
