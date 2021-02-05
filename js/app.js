@@ -67,6 +67,8 @@ const isGuessCorrect = event => {
     for(const letter of wordArray) {
         if(letter == textBox.value)
         letter.textContent = textBox.value
+        let letterIndex = wordArray.indexOf(letter)
+        wordArray.splice(letterIndex, 1)
     }
     
     // If incorrect, tell user it's incorrect.
