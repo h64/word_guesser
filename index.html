@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <script defer src="js/app.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="js/main.js"></script>
     <title>Guess the Word!</title>
-</head>
-<body>
-    <h1>I'm thinking of a word, can you guess it?</h1>
-    <div id="guess-word-container"></div>
+  </head>
+  <body>
+    <h1>I'm thinking of a fruit, can you guess it?</h1>
+    <div id="word-container">
+      <h3 id="guesses"></h3>
+    </div>
 
-    <form>
-        <input id="textbox" type="text">
-        <input type="submit">
+    <form id="guess-form">
+      <input id="textbox" type="text" />
+      <input type="submit" />
     </form>
 
-    <div id="messages"></div>
-</body>
+    <div id="message-container"></div>
+    <p id="maxG"></p>
+  </body>
 </html>
