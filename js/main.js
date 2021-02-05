@@ -57,10 +57,13 @@ const guessLetter = (event) => {
     if (textBox.value == word[n]) {
       console.log(word[n]);
       letter.textContent = word[n];
-      letter.classList.add("letter");
+      // letter.classList.add("letter");
       wordContainer.appendChild(letter);
       maxGuesses--;
       maxGID.innerText = `max guesses ${maxGuesses}`;
+    } else {
+      maxGuesses--;
+      maxGID.innerText = `${textBox.value} is incorrect max guesses ${maxGuesses}`;
     }
   }
 };
