@@ -1,13 +1,17 @@
 /* Constants */
-const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
+const WORD_LIST = ['feather', 'offense', 'football', 'marzipan', 'balloon']
 
-/* Variables and App State */
-let word = "";
+
+/* Game Logic Variables and State */
+let secretWord = ""
+let unguessedWord = [];
+let word = 0;
 
 /* DOM References */
-let wordContainer = document.querySelector('#guess-word-container');
-let textBox = document.querySelector('#textbox');
-let messages = document.querySelector('#messages');
+let guessForm = document.getElementById('guess-form')
+let messageContainer = document.querySelector('#message-container')
+let wordContainer = document.querySelector('#word-container')
+let wordLettersEl = document.getElementById('wrong-letters')
 
 /* Functions and app logic */
 
@@ -15,36 +19,58 @@ let messages = document.querySelector('#messages');
 // 1. Reset state variables
 // 2. Display the word blanks in the DOM
 const initialize = event => {
-    word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-    console.log('The word is:', word);
-    displayWordStatus();
+    secretWord = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
+    for (let i = 0; i < secretWord.length; i++) {
+        unguessedWord.push('_');
+    }
+    console.log(unguessedWord);
+    console.log('The secret word is ', secretWord);
+
+
 }
 
-// Helper function that adds multiple <div>_</div> to DOM
+initialize()
+
+const handleSubmit = event => {
+    // sets game state 
+    event.preventDefault();
+    let guess = messageContainer.value;
+    if (guess == 0) return;
+
+    letterString = unguessedWord.push('');
+
+    for (let i = 0; i < secretWord.length; i++) {
+        if (secretWord[i] === guess) {
+            unguessedWord[i] = guess;
+        }
+    }
+}
+
+console.log(secretWord)
+
 const displayWordStatus = () => {
-    // Clear(empty) all of the divs children 
-    while(wordContainer.firstChild) {
+    while (wordContainer.firstChild) {
         wordContainer.removeChild(wordContainer.firstChild);
     }
-    for(let i = 0; i < word.length; i++) {
-        let letter = document.createElement('div');
-        letter.textContent = '_'
-        letter.classList.add("letter");
-        wordContainer.appendChild(letter);
+    unguessedWord.forEach(letter => {
+        let letterDiv = document.createElement('div');
+        letterDiv.textContent = letter;
+        letterDiv.classList.add('letter');
+        wordContainer.appendChild(letterDiv);
+    })
+}
+// displays msg
+// refer to rock pap sci game today
+const displayMessage = msg => {
+    while (messages.firstChild) {
+        messages.removeChild(messages.firstChild)
     }
-}
+    let msg1 = document.createElement('h3');
+    msg1.textContent = msg;
 
-// On submit event: Guess a letter or guess the whole word
-const guessLetter = event => {
-    event.preventDefault();
-    console.log(`You submitted: ${textBox.value}`);
-}
-
-// Display a message to the user in the messagebox
-const displayMessage = msg => { 
-    /* Your code here! */
+    messages.appendChild(msg1);
 }
 
 /* Event Listeners */
 document.addEventListener('DOMContentLoaded', initialize);
-document.addEventListener('submit', guessLetter);
+guessForm.addEventListener('submit', handleSubmit);
