@@ -24,7 +24,7 @@ const initialize = event => {
         arrayLetter = word.charAt(i);
         wordArray.push(arrayLetter);
     }
-    console.log(wordArray)
+    // console.log(wordArray)
 }
 
 // guessLetter();
@@ -47,12 +47,8 @@ const displayWordStatus = () => {
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
     event.preventDefault();
-    // console.log(`You submitted: ${textBox.value}`);
     submittedLetter();
-
-
-
-    incorrectGuess();
+    isGuessCorrect();
 }
 
 // Display a message to the user in the messagebox
@@ -62,6 +58,22 @@ const submittedLetter = msg => {
     }
     messages.textContent = `You submitted: ${textBox.value}. `
     messages.classList.add("messages");
+}
+
+// Determine if letter is correct or incorrect
+const isGuessCorrect = event => {
+    /* If correct, add the letter to the guessed list,
+    and redraw the secret word with the new letter(s) showing.*/
+    for(const letter of wordArray) {
+        if(letter == textBox.value)
+        letter.textContent = textBox.value
+    }
+    
+    // If incorrect, tell user it's incorrect.
+    incorrectGuess();
+
+    // When the word is fully revealed, tell the user they've won!
+    guessedWholeWord();
 }
 
 const incorrectGuess = msg => {
@@ -79,3 +91,16 @@ const guessedWholeWord = msg => {
 /* Event Listeners */
 document.addEventListener('DOMContentLoaded', initialize);
 document.addEventListener('submit', guessLetter);
+
+
+
+
+
+
+
+
+
+// for(let i = 0; i < wordArray; i++)
+//         if(letter ) {
+//         let finalArray = wordArray.splice(i, 1)
+//         }
