@@ -11,10 +11,6 @@ let messages = document.querySelector("#messages"); //<--WHERE GAME TALKS TO USE
 
 /* Functions and app logic */
 
-// Initialize the game:
-// 1. Reset state variables
-// 2. Display the word blanks in the DOM
-//
 const initialize = (event) => {
   //<------------------------------------------initialize (function) GENERATES RANDOM WORD
   word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)];
@@ -44,31 +40,22 @@ const displayMessage = (msg) => {
 const guessLetter = (event) => {
   //<-------------------guessLetter(function) HOOKS SUBMIT BUTTON UP TO CONSOLE LOG// NOT SAYING IF GUESS IS CORRECT
   event.preventDefault();
-  console.log(`You submitted: ${textBox.value}`);
+  let splitWord = word.split("");
+  let guessLetter = splitWord;
 
-  function splitUpTheWord {
-  splitWord = word.split("");
-  for (i = 0; i <= splitWord.length; i++) {
-    let wordsLetters = splitWord[i];
-    
-  }}
+  console.log(`You submitted: ${textBox.value}`);
+  console.log(guessLetter.includes(textBox.value));
 
   if (textBox.value === "") {
     displayMessage("Try & guess one letter at a time");
-  } else if (
-    textBox.value === splitWord[0] ||
-    textBox.value === splitWord[1] ||
-    textBox.value === splitWord[2] ||
-    textBox.value === splitWord[3] ||
-    textBox.value === splitWord[4] ||
-    textBox.value === splitWord[5] ||
-    textBox.value === splitWord[6]
-  ) {
+  } else if (guessLetter.includes(textBox.value)) {
     displayMessage("You guessed a correct letter!");
+  } else {
+    displayMessage("Incorrect Letter!");
+    textBox.value = null;
   }
 };
 
-// displayMessage();
 /* Event Listeners */
 document.addEventListener("DOMContentLoaded", initialize);
 document.addEventListener("submit", guessLetter);
