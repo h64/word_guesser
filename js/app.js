@@ -3,11 +3,13 @@ const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
 /* Variables and App State */
 let word = "";
+let wordArray = []
 
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
 let textBox = document.querySelector('#textbox');
 let messages = document.querySelector('#messages');
+let incMessages = document.querySelector('#incorrect-messages')
 
 /* Functions and app logic */
 
@@ -18,7 +20,15 @@ const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
     console.log('The word is:', word);
     displayWordStatus();
+    for (let i = 0; i < word.length; i++) {
+        arrayLetter = word.charAt(i);
+        wordArray.push(arrayLetter)
+    }
+    console.log(wordArray)
 }
+
+// guessLetter();
+
 
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
@@ -37,12 +47,33 @@ const displayWordStatus = () => {
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
     event.preventDefault();
-    console.log(`You submitted: ${textBox.value}`);
+    // console.log(`You submitted: ${textBox.value}`);
+    submittedLetter();
+
+
+
+    incorrectGuess();
 }
 
 // Display a message to the user in the messagebox
-const displayMessage = msg => { 
-    /* Your code here! */
+const submittedLetter = msg => {
+    while(messages.firstChild) {
+        messages.removeChild(messages.firstChild);
+    }
+    messages.textContent = `You submitted: ${textBox.value}. `
+    messages.classList.add("messages");
+}
+
+const incorrectGuess = msg => {
+    messages.append("That is an incorrect guess.")
+}
+
+const guessedWholeWord = msg => {
+    while(messages.firstChild) {
+        messages.removeChild(messages.firstChild);
+    }
+    messages.textContent = `Congrats, you guessed the whole word!`
+    messages.classList.add("messages");
 }
 
 /* Event Listeners */

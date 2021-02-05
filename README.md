@@ -8,10 +8,10 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 
 ## Functionality
 
-* Store a list (or tuple) of 5 to 10 words in your script.
-* Randomly choose a word from this list as the secret word.
-* Display the unrevealed word as underscores (with the same length.)
-* Prompt the user to enter a letter.
+<!-- * Store a list (or tuple) of 5 to 10 words in your script. -->
+<!-- * Randomly choose a word from this list as the secret word. -->
+<!-- * Display the unrevealed word as underscores (with the same length.) -->
+<!-- * Prompt the user to enter a letter. -->
 * If the letter is in the word, mark it as revealed and visually display that letter in the word.
 * If the letter is incorrect, indicate to the user that the guess was incorrect.
 
@@ -24,10 +24,10 @@ Fortunately, the starter code already has a substantial amount of coding done fo
 
 ### Pseudocode
 
-1. Initialize the game: Initialize all variables to default values.
-2. Randomly select a secret word.
-3. Display the word as blanks.
-4. Ask the user for a letter.
+<!-- 1. Initialize the game: Initialize all variables to default values. -->
+<!-- 2. Randomly select a secret word. -->
+<!-- 3. Display the word as blanks. -->
+<!-- 4. Ask the user for a letter. -->
 5. Determine if letter is correct or incorrect.
 6. If incorrect, tell the user it's incorrect.
 7. If correct, add the letter to the guessed list, redraw the secret word with the new letter(s) showing.
