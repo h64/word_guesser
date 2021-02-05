@@ -17,7 +17,6 @@ const initialize = (event) => {
   console.log("The word is:", word);
   displayWordStatus();
 };
-
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
   //<------------------------------------------------displayWordStatus (function) HIDES THE RANDOM WORD
@@ -36,18 +35,21 @@ const displayWordStatus = () => {
     //<----------guessLetter(function) HOOKS SUBMIT BUTTON UP TO CONSOLE LOG// NOT SAYING IF GUESS IS CORRECT
     event.preventDefault();
     let guessLetter = word.split("");
+    letterGuess = textBox.value;
 
+    console.log(guessLetter);
     console.log(`You submitted: ${textBox.value}`);
     console.log(guessLetter.includes(textBox.value));
 
-    if (textBox.value === "") {
+    if (letterGuess === "") {
       displayMessage("Try & guess one letter at a time");
-    } else if (guessLetter.includes(textBox.value)) {
+    } else if (guessLetter.includes(letterGuess)) {
       displayMessage("You guessed a correct letter!");
-      textBox.value = null;
+
+      letterGuess = null;
     } else {
       displayMessage("Incorrect Letter!");
-      textBox.value = null;
+      letterGuess = null;
     }
   };
   document.addEventListener("submit", guessLetter);
