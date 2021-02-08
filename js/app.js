@@ -1,10 +1,9 @@
-console.log('hello')
 /* Constants */
 const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
 
 /* Variables and App State */
 let word = "";
-let hiddenWord = []
+let wordStatus = [];
 
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
@@ -18,10 +17,12 @@ let messages = document.querySelector('#messages');
 // 2. Display the word blanks in the DOM
 const initialize = event => {
     word = WORD_LIST[Math.floor(Math.random() * WORD_LIST.length)]
-    hiddenWord = word.split('').map(x => '_')
+    wordStatus = word.split('').map(l => '_');
+
+    console.log('The word is:', word);
     displayWordStatus();
 }
- 
+
 // Helper function that adds multiple <div>_</div> to DOM
 const displayWordStatus = () => {
     // Clear(empty) all of the divs children 
@@ -30,39 +31,57 @@ const displayWordStatus = () => {
     }
     for(let i = 0; i < word.length; i++) {
         let letter = document.createElement('div');
-        letter.textContent = '_'
+        letter.textContent = wordStatus[i];
         letter.classList.add("letter");
         wordContainer.appendChild(letter);
     }
 }
-initialize()
-console.log(word)
+
 // On submit event: Guess a letter or guess the whole word
 const guessLetter = event => {
-    initialize()
     event.preventDefault();
-    let userValue = textBox.value
-    let userValueArr = userValue.split('')
-    hiddenWord = word.split('') 
-    for(let i = 0; i<hiddenWord.length; i++){
-        console.log(hiddenWord[i])
-    }
-    for (let i = 0; i < userValueArr.length; i++){
-        if(userValueArr[i] == hiddenWord[i]){
-        
-        }
-        else {
-            console.log('try again')
-        }
-        
-    }
+    let guess = textBox.value;
+    if(guess.length == 0) return; // Reject empty submission
 
-    console.log(`You submitted: ${textBox.value}`);
+    letters = word.split('');
+    // console.log(`You submitted: ${guess}`);
+    // console.log('Letters:', letters);
+
+    if(guess.length == 1) { // Guessing one letter
+        if(letters.includes(guess)) {
+            displayMessage(`${guess} is a match!`)
+            for(let i = 0; i < word.length; i++) {
+                if(word[i] == guess) {
+                    wordStatus[i] = guess;
+                } 
+            }
+            displayWordStatus();
+            if(!wordStatus.includes("_")) {
+                displayMessage("Congrats! You've guessed the whole word!")
+            }
+            
+        } else {
+            displayMessage(`${guess} is not a match.`)
+        }
+    } else {
+        if(guess == word) {
+            displayMessage("Congrats! You've guessed the whole word!")
+            wordStatus = letters;
+            displayWordStatus();
+        } else {
+            displayMessage(`Sorry! ${guess} is not the word I'm thinking of!`);
+        }
+    }
 }
 
-// Display a message to the user in the messagebox
-const displayMessage = msg => { 
-    /* Your code here! */
+const displayMessage = msg => {
+    // Clear all elements inside messages
+    while(messages.firstChild) {
+        messages.removeChild(messages.firstChild);
+    }
+    let p = document.createElement('p');
+    p.textContent = msg;
+    messages.appendChild(p);
 }
 
 /* Event Listeners */
