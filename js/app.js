@@ -1,8 +1,15 @@
+// Randomly choose a word from this list as the secret word.
+// Display the unrevealed word as underscores (with the same length.)
+// Prompt the user to enter a letter.
+// If the letter is in the word, mark it as revealed and visually display that letter in the word.
+// If the letter is incorrect, indicate to the user that the guess was incorrect.
+
 /* Constants */
-const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather']
+const WORD_LIST = ['producer', 'brainstorm', 'explosion', 'soup', 'feather', 'mama', 'fries', 'television']
 
 /* Variables and App State */
 let word = "";
+let ungesstword = [];
 
 /* DOM References */
 let wordContainer = document.querySelector('#guess-word-container');
@@ -28,9 +35,9 @@ const displayWordStatus = () => {
     }
     for(let i = 0; i < word.length; i++) {
         let letter = document.createElement('div');
-        letter.textContent = '_'
+        letter.textContent = '_';
         letter.classList.add("letter");
-        wordContainer.appendChild(letter);
+        let eachletter = wordContainer.appendChild(letter);
     }
 }
 
@@ -38,6 +45,9 @@ const displayWordStatus = () => {
 const guessLetter = event => {
     event.preventDefault();
     console.log(`You submitted: ${textBox.value}`);
+
+    //Push 'textBox.value' into displayWordStatus
+
 }
 
 // Display a message to the user in the messagebox
